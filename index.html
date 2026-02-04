@@ -52,6 +52,14 @@
             color: #666;
             font-size: 14px;
         }
+        .status-warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
     </style>
 </head>
 <body>
@@ -59,18 +67,50 @@
         <h1 class="header">📥 文件下载中心</h1>
         
         <div class="file-info">
-            <h2>📁 {{filename}}</h2>
-            <p>文件大小: {{filesize}}</p>
-            <p>分享时间: {{share_time}}</p>
+            <h2>📁 docx</h2>
+            <p>文件大小: 13318 字节</p>
+            <p>分享时间: 2026-02-04 15:28:34</p>
         </div>
         
-        <a href="{{download_url}}" class="download-btn" download>
+        <!-- 动态链接支持：使用JavaScript在客户端动态生成链接 -->
+        <a href="#" id="download-link" class="download-btn" download>
             🚀 点击下载文件
         </a>
+        
+        {% if pages_warning %}
+        <div class="status-warning">
+            <strong>⚠️ 注意:</strong> {{pages_warning}}
+        </div>
+        {% endif %}
         
         <div class="footer">
             <p>Powered by GitHub云盘 | 安全可靠的文件分享服务</p>
         </div>
     </div>
+
+    <script>
+        // 动态生成下载链接
+        document.addEventListener('DOMContentLoaded', function() {
+            const username = 'Feng-zimo';
+            const repo = 'ghpan-share';
+            const filename = '1770190110_docx';
+            
+            // 构建动态链接
+            const downloadUrl = `https://${username}.github.io/${repo}/${filename}`;
+            
+            // 设置下载链接
+            const downloadLink = document.getElementById('download-link');
+            if (downloadLink) {
+                downloadLink.href = downloadUrl;
+                downloadLink.setAttribute('download', filename);
+                
+                // 添加点击事件监听器
+                downloadLink.addEventListener('click', function(e) {
+                    // 可以在这里添加下载前的处理逻辑
+                    console.log('准备下载:', downloadUrl);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
